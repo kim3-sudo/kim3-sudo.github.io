@@ -1,5 +1,5 @@
 ---
-title: "NCAA Basketball Playoff Prediction Analysis
+title: "NCAA Basketball Playoff Prediction Analysis"
 date: "2021-12-24T12:00:00.000Z"
 description: "The ability to predict playoff results in the NCAA Men’s Basketball tournament in March is a question of obvious interest to coaches and fans alike, and for this research, we leveraged a machine learning approach to create a predictive model based on prior years performance, by team."
 author: "kim3-sudo"
