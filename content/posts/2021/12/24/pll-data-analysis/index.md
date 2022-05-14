@@ -1,0 +1,11 @@
+---
+title: "PLL Data Analysis
+date: "2021-12-24T12:00:00.000Z"
+description: "This investigation advances the hypothesis that groundballs can be used to predict player success on the field by using groundballs in their relation to scoring and to team performance. Machine learning models are developed to learn the concept: Within a game, what is the likelihood that any given player will win a groundball k times?"
+author: "kim3-sudo"
+slug: "posts/2021/12/24/pll-data-analysis"
+
+---
+Groundballs in the Premier Lacrosse League (PLL) occur whenever a team loses possession of the ball, which needs to be picked up from the ground by some player from either team. During a loose ball event, no team has possession, and whichever team can regain control of the ball automatically becomes the offensive team. Losses of possession and the ensuing groundballs disrupt the momentum and play of the offensive team and provide the defensive team with an opportunity to gain possession and become the offensive team. This investigation advances the hypothesis that groundballs can be used to predict player success on the field by using groundballs in their relation to scoring and to team performance. Machine learning models are developed to learn the concept: Within a game, what is the likelihood that any given player will win a groundball k times? PLL player data for two regular seasons and one postseason were used to train the models. Results presented evidence to suggest that hypothesis. Under the conditions used to train the model, player likelihood to win a groundball can be anticipated at a mid-to-low false discovery rate (less than 22%). This investigation contributes to the sports science literature by demonstrating the predictability of player success which may or may not be correlated to certain actions in-game. To the author’s knowledge, direct prediction of groundball wins have not previously appeared in similar literature, since there is little literature preexisting on professional lacrosse or lacrosse strategies.
+
+The scripts and analyses used are available at GitHub in the following GitHub repository: [https://github.com/kim3-sudo/pll_analysis](https://github.com/kim3-sudo/pll_analysis). The final report will be made available (if it isn’t already) on the Kenyon Sports Analytics Society webpage.
