@@ -346,6 +346,7 @@ class Home extends React.Component {
                                 </div>
                             </div>
                         </RevealAnimation>
+                    </div>
                 </section>
                 <Footer />
             </div>
