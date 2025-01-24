@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+    <head>
+        <title>COMP 348 SSD</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            span.email b{
+                display: none;
+            }
+            abbr {
+                cursor: help;
+            }
+            .rainbow {
+                background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            #scratch {
+                height: 100px;
+            }
+            .pinkalicious {
+                background-color: rgb(230, 0, 214);
+                font-family: 'Comic Sans MS', 'Comic Sans', sans-serif;
+                position: absolute;
+            }
+            .wavy {
+                animation-name: wavy;
+                animation-duration: 1.3s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+                position: relative;
+                top: 0;
+                left: 0;
+            }
+            @keyframes wavy {
+                0% {
+                    top: 0px;
+                }
+                50% {
+                    top: -15px;
+                }
+                100% {
+                    top: 0px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div style="text-align: center;">
+            <b>COMP 348 Software & Systems Design</b>
+            <br>
+            <b>IDE Project Page</b>
+        </div>
+        <p>
+            <b>Contact Information</b>
+        </p>
+        <blockquote>
+            Website: <a href="https://kim3-sudo.github.io/comp348" style="text-decoration: none;color: inherit;">https://kim3-sudo.github.io/comp348</a>
+            <br>
+            E-mail: <span class="email">kim3@kenyon<b>.kenyon</b>.edu</span>
+            <br>
+            Office: Farr Hall 204
+            <br>
+            Office hours: Available on request
+        </blockquote>
+        <p>
+            <b>Project Definition</b>
+        </p>
+        <p>A web-based platform where one can type code in, press run, and see the console output on the other side, sort of like a code playground.</p>
+        <p>
+            <b>Required Features</b>
+        </p>
+        <ul>
+            <li>Must include a way to have user accounts, with specific permission levels</li>
+            <li>Language support: Python 3</li>
+            <li>Ability to upgrade the supported Python version</li>
+        </ul>
+        <p>
+            <b>Optional Features</b>
+        </p>
+        <ul>
+            <li>Ability to add additional programming languages</li>
+            <li>Language support: C++14 (and later, using Clang compiler)</li>
+            <li>Language support: C# (using Microsoft compiler)</li>
+            <li>Assignment, submission, and grading module</li>
+            <li>Safe code storage</li>
+            <li>Integration with Git code repositories</li>
+            <li>Malware/code injection mitigations</li>
+        </ul>
+        <p>
+            <b>Deliverables</b>
+        </p>
+        <ul>
+            <li>Source code</li>
+            <li>Binaries may be included, if needed</li>
+            <li>Software-specific documentation</li>
+            <li>List of open-source software components used</li>
+        </ul>
+    </body>
+</html>
