@@ -17,7 +17,7 @@
         <div style="text-align: center;">
             <b>COMP 348 Software & Systems Design</b>
             <br>
-            <b>Database Information</b>
+            <b>Git Information</b>
         </div>
         <p>
             <b>Contact Information</b>
@@ -37,6 +37,93 @@
         <p>
             <b>Git</b> is a version control system. It is used to version-control source code. <b>GitHub</b>/<b>GitLab</b>/<b>Bitbucket</b>/(<em>insert provider name here</em>) is a Git provider; that is, they provide Git services. They are not the same thing!
         </p>
+        <p>
+            <b>Git, Conceptually</b>
+        </p>
+        <p>Rather than save your entire file every single time (expensive and timely), Git finds the <em>differences</em> (the <b>diff</b>) between your old code and your new code, then saves those differences.</p>
+        <p>This makes committing files and finding changes much faster.</p>
+        <p>
+            <b>Repositories</b>
+        </p>
+        <p>A “source of truth” codebase must exist for a project. This is the code that everyone will compare theirs to and merge into.</p>
+        <p>This is know as the <b>remote repository</b>, and only one copy of the remote should exist.</p>
+        <p>When you make a copy of the remote repository onto your local machine, you are making a <b>local repository</b>. Making a local repository is called <b>cloning</b> the repository. Many local repositories can exist simultaneously.</p>
+        <p>
+            <b>Change Logging</b>
+        </p>
+        <p>Many times, you don't want to sync your changes with the remote repository immediately. You might need to run unit tests or debug your code before you push it to the remote repository. When you're ready to, you will <b>stage</b> and <b>commit</b> those changes.</p>
+        <ul>
+            <li><b>Staging</b> a change tells Git that you're ready to commit those changes to the remote repository, but it doesn't actually make the change quite yet.</li>
+            <li><b>Committing</b> a change tells Git to put the staged change into the permanent ledger of the repository and to change the codebase to reflect the staged changes.</li>
+        </ul>
+        <p>
+            <b>Syncing</b>
+        </p>
+        <p>When you stage and commit a change, it is not immediately synced. Instead, a <b>pull</b> and <b>push</b> process must be run.</p>
+        <ul>
+            <li>The <b>pull</b> process gets the latest changes from the remote codebase. This makes sure that any changes that were made before you sync are reflected in the new codebase.</li>
+            <li>The <b>push</b> process takes your changes, and as its name implies, pushes them to the remote repository.</li>
+        </ul>
+        <p>
+            <b>Cloning</b>
+        </p>
+        <p>When a project begins, it only exists in the remote repository, like the copy in GitLab. In order to make changes to the repository, you need to make a local copy of that repository that you can edit.</p>
+        <p>The most common clone method used today is HTTPS.</p>
+        <p>
+            <b>The <code>.gitignore</code> File</b>
+        </p>
+        <p>The <code>.gitignore</code> file is a normally hidden file. On macOS, press <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>.</kbd> to show hidden files.</p>
+        <p>Use the <code>.gitignore</code> file to tell Git what files and directories you always want to ignore (not commit).</p>
+        <p>A collection of good <code>.gitignore</code> files can be found at <a href="https://github.com/github/gitignore">https://github.com/github/gitignore</a>.</p>
+        <p>Asterisks <code>*</code> are used as the wildcard character, and pound signs <code>#</code> are comments.</p>
+        <p>
+            <b>Make a Change</b>
+        </p>
+        <p>Change the files in your local repository.</p>
+        <p>
+            <b>Stage</b>
+        </p>
+        <p><b>Stage your changes</b> &mdash; add your changes to the next commit. Any changes that aren't staged won't be added.</p>
+        <p>
+            <b>Commit</b>
+        </p>
+        <p><b>Commit your changes</b> &mdash; the staged changes are marked to be added to the codebase on the next push.</p>
+        <p>If you pass the <code>-m</code> option and a string when making a commit, Git will use that string as the commit message.</p>
+        <p>If you only use <code>git commit</code>, Git will open a text editor in the terminal for you to write a commit message. Git will typically use Vi unless told otherwise.</p>
+        <p>Bare essentials Vi: Press <kbd>i</kbd> to enter Insert mode, then use the arrow keys to navigate. To save, press <kbd>Esc</kbd>, then <kbd>:</kbd> (colon), then <kbd>w</kbd> (for write), then <kbd>q</kbd> (for quit), then <kbd>Enter</kbd>.</p>
+        <p>Alternatively, just skip all of this and use the <code>-m</code> option when committing.</p>
+        <p>Good commit messages...</p>
+        <ul>
+            <li>Are short (&lt;72 characters)</li>
+            <li>Are descriptive</li>
+            <li>Are succinct</li>
+        </ul>
+        <p>Instead of "I added a print line to the output function on line 73 of the main file," say "Add print to output function".</p>
         <p><em>This document is still under construction.</em></p>
+        <p>Remember, Git is recording the committer, file, line number, and change for you. You're only adding the human-readable notes.</p>
+        <p>While <em>Squashed some bugs</em> and <em>More stuff</em> are both short, they're not very descriptive. <em>Add name, age, height, weight, and salary labels with corresponding text boxes and more over a submit button</em> is too long and is not very succinct. <em>Fix null pointer exception in user login</em> hits a good balance of description and brevity. If someone wants to see exactly what was changed, they can look directly at the code.</p>
+        <p>
+            <b>Pull and Push</b>
+        </p>
+        <p>Before you make your changes to the remote repository, first pull. This gets the latest version of the remote repository into your local repository. This will help stop merge conflicts.</p>
+        <p>After you've synced the remote repository with your local repository, push your code changes into the remote repository.</p>
+        <p>
+            <b>Branches</b>
+        </p>
+        <p>Branches allow different people to work on different components of a piece of software without worrying that their branch will affect the main trunk. Branches can be used to develop, test, and validate software before it is put into production.</p>
+        <p>There are two ways to create a branch: using the web GUI in GitLab, then pulling it down to your local repository, or by using the command line interface and pushing it up to the remote repository.</p>
+        <p>Neither method is better or worse than the other; it's all about what works for you.</p>
+        <p>If the branch already exists, you can simply switch to it.</p>
+        <p>In GitLab, click on the branches list, then select the branch you want to view. This only affects what you see in the web interface, not what's on your local machine.</p>
+        <p>In the command line interface, use the <code>checkout</code> command.</p>
+        <p>Do not use the <code>-b</code> option &mdash; this will create a new branch with a duplicate name, which is a bad thing!</p>
+        <p>
+            <b>Merging</b>
+        </p>
+        <p>Merging is the process of taking the changes in a branch and combining them with another branch (often the main or master branch).</p>
+        <p>The preferred method to merge your branches is by using the GitLab web interface. Some extra checks are made before the merg is actually executed to make sure that merge conflicts won't occur or can be addressed earlier. Forcing a merge using the CLI is not recommended, since these checks are not made until execution time and changes actually start being made.</p>
+        <p>In the perfect world, there wouldn't be anything wrong with merging in the CLI, but since merge conflicts can occur fairly easily in larger development projects, it's important to carry out these checks beforehand.</p>
+        <p><em>This document is currently being worked on.</em></p>
+        <p><a href="index.html">Back</a></p>
     </body>
 </html>
