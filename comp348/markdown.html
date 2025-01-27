@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+    <head>
+        <title>COMP 348 SSD</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            span.email b{
+                display: none;
+            }
+            abbr {
+                cursor: help;
+            }
+            table, th, td {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="text-align: center;">
+            <b>COMP 348 Software & Systems Design</b>
+            <br>
+            <b>Markdown</b>
+        </div>
+        <p>
+            <b>Contact Information</b>
+        </p>
+        <blockquote>
+            Website: <a href="https://kim3-sudo.github.io/comp348" style="text-decoration: none;color: inherit;">https://kim3-sudo.github.io/comp348</a>
+            <br>
+            E-mail: <span class="email">kim3@kenyon<b>.kenyon</b>.edu</span>
+            <br>
+            Office: Farr Hall 204
+            <br>
+            Office hours: Available on request
+        </blockquote>
+        <p>
+            <b>What is Markdown?</b>
+        </p>
+        <p>Markdown is a type of markup language (remember, markup language is still code, but it's different from a programming language). It uses the <code>.md</code> file extension, and you can think of it as a stripped-down version of HTML, designed to nicely render in a lot of different places. Its lack of customizability is actually a boon, since it ensures that the text will be rendered correctly for wherever you put it.</p>
+        <p>It's very common in code repositories as bundled documentation, like in Git repositories as the first <code>README.md</code> document that's created when you open a new repository.</p>
+        <hr>
+        <code>
+            # H1
+        </code><br>
+        <code>
+            ## H2
+        </code><br>
+        <code>
+            ### H3
+        </code><br>
+        <code>
+            #### H4
+        </code><br>
+        <code>
+            ##### H5
+        </code><br>
+        <code>
+            ###### H6
+        </code>
+        <h1>H1</h1>
+        <h2>H2</h2>
+        <h3>H3</h3>
+        <h4>H4</h4>
+        <h5>H5</h5>
+        <h6>H6</h6>
+        <hr>
+        <code>This text is *italicized*, and this text is **bolded**. ~~Scratch this text out,~~ and ***really emphasize this***.</code>
+        <p>This text is <em>italicized</em>, and this text is <b>bolded</b>. <s>Scratch this text out,</s> and <em><b>really emphasize this</b></em>.</p>
+        <hr>
+        <code>1. An item</code><br>
+        <code>2. Another item</code><br>
+        <code>&nbsp;&nbsp;a. A subitem</code><br>
+        <code>&nbsp;&nbsp;b. Another subitem</code>
+        <ol>
+            <li>An item</li>
+            <li>Another item
+                <ol>
+                    <li>A subitem</li>
+                    <li>Another subitem</li>
+                </ol>
+            </li>
+        </ol>
+        <hr>
+        <code>- An item</code><br>
+        <code>- Another item</code><br>
+        <code>&nbsp;&nbsp;- A subitem</code><br>
+        <code>&nbsp;&nbsp;- Another subitem</code>
+        <ul>
+            <li>An item</li>
+            <li>Another item
+                <ul>
+                    <li>A subitem</li>
+                    <li>Another subitem</li>
+                </ul>
+            </li>
+        </ul>
+        <hr>
+        <code>There is a link [here](https://github.com). You can also go straight to &lt;https://github.com&gt;, which is functionally the same as [https://github.com](https://github.com).</code>
+        <p>There is a link <a href="https://github.com">here</a>. You can also go straight to <a href="https://github.com">https://github.com</a>, which is functionally the same as <a href="https://github.com">https://github.com</a>.</p>
+        <hr>
+        <code>Say you're writing about something, and you want to emphasize `function(str var1)` function. Make sure you include the `var1` parameter. (The backtick is above the Tab key.)</code>
+        <p>Say you're writing about something, and you want to emphasize the <code>function(str var1)</code> function. Make sure you include the <code>var1</code> parameter. (The backtick is above the Tab key.)</p>
+        <hr>
+        <code>```</code><br>
+        <code>No language indicated, so no syntax highlighting here.</code><br>
+        <code>But it doesn't stop you from using the &lt;tags&gt;.</code><br>
+        <code>```</code><br>
+        <br>
+        <code>No language indicated, so no syntax highlighting here.</code><br>
+        <code>But it doesn't stop you from using the &lt;tags&gt;.</code><br>
+        <br>
+        <code>```python</code><br>
+        <code># This is some Python code</code><br>
+        <code>var = "Hello, world!"</code><br>
+        <code>print (var)</code><br>
+        <code>```</code><br>
+        <br>
+        <code><span style="color: forestgreen"># This is some Python code</span></code><br>
+        <code>var&nbsp;<span style="color: rgb(53, 103, 170)">=&nbsp;</span><span style="color: rgb(10, 48, 105)">"Hello, world!"</span></code><br>
+        <code><span style="color: rgb(214, 73, 83)">print</span>&nbsp;(var)</code><br>
+        <p><em>Note: The colors may not match exactly from platform to platform, since the exact syntax highlighting engine used can differ from service provider. </em></p>
+        <hr>
+        <code>&gt; You miss *100%* of the shots you don't take.</code><br>
+        <code>- Wayne Gretsky</code>
+        <p>
+            <blockquote>You miss <em>100%</em> of the shots you don't take.</blockquote>
+            - Wayne Gretsky
+        </p>
+        <hr>
+        <p><em>Note: Tables aren't a part of the core Markdown spec, but they are widely supported.</em></p>
+        <code>| header | header | header |</code><br>
+        <code>|--------|--------|--------|</code><br>
+        <code>| data | data | data |</code><br>
+        <code>| data | data | data |</code><br>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <td>header</td>
+                    <td>header</td>
+                    <td>header</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                </tr>
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><em>Hint: Don't make tables from scratch! Do a quick Google search for "markdown table generator" instead! They even exist for HTML tables! It doesn't remove the need to know what each tag/element is doing, but it does make it easier.</em></p>
+        <hr>
+        <p><a href="index.html">Back</a></p>
+    </body>
+</html>

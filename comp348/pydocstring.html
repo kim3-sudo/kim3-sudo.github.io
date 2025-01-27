@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+    <head>
+        <title>COMP 348 SSD</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            span.email b{
+                display: none;
+            }
+            abbr {
+                cursor: help;
+            }
+            span.def {
+                color: blue;
+            }
+            span.function {
+                color: rgb(131, 106, 54);
+            }
+            span.parameter {
+                color: rgb(0, 16, 128);
+            }
+            span.class {
+                color: rgb(38, 127, 153);
+            }
+            span.string {
+                color: rgb(163, 21, 21);
+            }
+            span.number {
+                color: rgb(9, 134, 88);
+            }
+            span.keyword {
+                color: rgb(197, 71, 229);
+            }
+            span.comment {
+                color: rgb(0, 128, 0);
+            }
+        </style>
+    </head>
+    <body>
+        <div style="text-align: center;">
+            <b>COMP 348 Software & Systems Design</b>
+            <br>
+            <b>Python docstring Guidance</b>
+        </div>
+        <p>
+            <b>Contact Information</b>
+        </p>
+        <blockquote>
+            Website: <a href="https://kim3-sudo.github.io/comp348" style="text-decoration: none;color: inherit;">https://kim3-sudo.github.io/comp348</a>
+            <br>
+            E-mail: <span class="email">kim3@kenyon<b>.kenyon</b>.edu</span>
+            <br>
+            Office: Farr Hall 204
+            <br>
+            Office hours: Available on request
+        </blockquote>
+        <p>
+            <b>What is a docstring?</b>
+        </p>
+        <p>Open your IDE or text editor, then open a Python script. Using your mouse, hover over a function. See that help text? That's a docstring.</p>
+        <p>You can think of a docstring as inline documentation that can help people down the line write using your code. It's especially important as you write abstraction objects, like functions, classes, structs, and methods.</p>
+        <p>A good docstring contains the purpose, parameters, return value(s), and possibly some examples.</p>
+        <p>
+            <b>An Example</b>
+        </p>
+        <p>Consider this class method, a method in the <code><span class="class">Database</span></code> class (you need not understand exactly what's going on here &mdash; that's part of the point):</p>
+        <code><span class="def">def</span> <span class="function">blob_to_file</span><span class="def">(</span><span class="parameter">self</span>, <span class="parameter">blob</span>:<span class="class">oracledb</span>.DB_TYPE_BLOB, <span class="parameter">filename</span>: <span class="class">str</span><span class="def">)</span>:</code><br>
+        <code>&nbsp;&nbsp;<span class="parameter">offset</span> = <span class="number">1</span></code><br>
+        <code>&nbsp;&nbsp;<span class="parameter">num_bytes_in_chunk</span> = <span class="number">65536</span></code><br>
+        <code>&nbsp;&nbsp;<span class="keyword">with</span> <span class="function">open</span><span class="def">(</span><span class="parameter">filename</span>, <span class="string">'wb'</span><span class="def">)</span> <span class="keyword">as</span> <span class="parameter">f</span>:</code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span> <span class="def">True</span>:</code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Read the data from the blob object using the special oracledb.DB_TYPE_BLOB.read method</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">data</span> = <span class="parameter">blob</span>.read<span class="def">(</span><span class="parameter">offset</span>, <span class="parameter">num_bytes_in_chunk</span><span class="def">)</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="parameter">data</span>:</code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># If there's data still to write, write it to f</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">f</span>.<span class="function">write</span><span class="def">(</span><span class="parameter">data</span><span class="def">)</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="function">len</span><span class="def">(</span><span class="parameter">data</span><span class="def">) &lt; <span class="parameter">num_bytes_in_chunk</span>:</code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># If we reached the end of the file</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Keep increasing the offset from byte 1</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">offset</span> += <span class="function">len</span><span class="def">(</span><span class="parameter">data</span><span class="def">)</span></code>
+        <p>When we actually try to invoke this class method, it's tough to understand what it does, when to use it, or how to use it without some more information. We <em>could</em> open the class method file and read the inline comments, but that doesn't really help us. The inline comments are really intended for whoever's maintaining the class itself, not for using the class method.</p>
+        <p>Remember, this is a class method, and part of the purpose of a class is to add a layer of abstraction. That layer is pierced when we force the developer to have to open the class method anyways. What if we could give the developer that information without having to open the file?</p>
+        <p>As it turns out, there's a good way to do this: the docstring. As indicated above, the docstring is a piece of inline documentation that's displayed to the developer. After you invoke your class method, create a multiline string.</p>
+        <code><span class="def">def</span> <span class="function">blob_to_file</span><span class="def">(</span><span class="parameter">self</span>, <span class="parameter">blob</span>:<span class="class">oracledb</span>.DB_TYPE_BLOB, <span class="parameter">filename</span>: <span class="class">str</span><span class="def">)</span>:</code><br>
+        <code>&nbsp;&nbsp;<span class="string">"""</span></code><br>
+        <code>&nbsp;&nbsp;<span class="string">"""</span></code><br>
+        <code>&nbsp;&nbsp;<span class="parameter">offset</span> = <span class="number">1</span></code><br>
+        <code>&nbsp;&nbsp;<span class="parameter">num_bytes_in_chunk</span> = <span class="number">65536</span></code><br>
+        <code>&nbsp;&nbsp;<span class="keyword">with</span> <span class="function">open</span><span class="def">(</span><span class="parameter">filename</span>, <span class="string">'wb'</span><span class="def">)</span> <span class="keyword">as</span> <span class="parameter">f</span>:</code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span> <span class="def">True</span>:</code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Read the data from the blob object using the special oracledb.DB_TYPE_BLOB.read method</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">data</span> = <span class="parameter">blob</span>.read<span class="def">(</span><span class="parameter">offset</span>, <span class="parameter">num_bytes_in_chunk</span><span class="def">)</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="parameter">data</span>:</code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># If there's data still to write, write it to f</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">f</span>.<span class="function">write</span><span class="def">(</span><span class="parameter">data</span><span class="def">)</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="function">len</span><span class="def">(</span><span class="parameter">data</span><span class="def">) &lt; <span class="parameter">num_bytes_in_chunk</span>:</code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># If we reached the end of the file</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Keep increasing the offset from byte 1</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">offset</span> += <span class="function">len</span><span class="def">(</span><span class="parameter">data</span><span class="def">)</span></code>
+        <p>The very first thing we should put in our docstring is the developer-friendly description of what the class method. This is a good place to describe the method and any important notes on how to use it.</p>
+        <code><span class="def">def</span> <span class="function">blob_to_file</span><span class="def">(</span><span class="parameter">self</span>, <span class="parameter">blob</span>:<span class="class">oracledb</span>.DB_TYPE_BLOB, <span class="parameter">filename</span>: <span class="class">str</span><span class="def">)</span>:</code><br>
+        <code>&nbsp;&nbsp;<span class="string">"""</span></code><br>
+        <code>&nbsp;&nbsp;<span class="string">Copy the blob data returned by an Oracle database into a file.<br>&nbsp;&nbsp;When the data are returned by the cursor, it is in binary form in memory, and it needs to be written out byte-by-byte.<br>&nbsp;&nbsp;This method writes out a file to the disk, given that the blob data is given.</span></code><br>
+        <code>&nbsp;&nbsp;<span class="string">"""</span></code><br>
+        <code>&nbsp;&nbsp;<span class="parameter">offset</span> = <span class="number">1</span></code><br>
+        <code>&nbsp;&nbsp;<span class="parameter">num_bytes_in_chunk</span> = <span class="number">65536</span></code><br>
+        <code>&nbsp;&nbsp;<span class="keyword">with</span> <span class="function">open</span><span class="def">(</span><span class="parameter">filename</span>, <span class="string">'wb'</span><span class="def">)</span> <span class="keyword">as</span> <span class="parameter">f</span>:</code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span> <span class="def">True</span>:</code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Read the data from the blob object using the special oracledb.DB_TYPE_BLOB.read method</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">data</span> = <span class="parameter">blob</span>.read<span class="def">(</span><span class="parameter">offset</span>, <span class="parameter">num_bytes_in_chunk</span><span class="def">)</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="parameter">data</span>:</code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># If there's data still to write, write it to f</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">f</span>.<span class="function">write</span><span class="def">(</span><span class="parameter">data</span><span class="def">)</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="function">len</span><span class="def">(</span><span class="parameter">data</span><span class="def">) &lt; <span class="parameter">num_bytes_in_chunk</span>:</code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># If we reached the end of the file</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Keep increasing the offset from byte 1</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">offset</span> += <span class="function">len</span><span class="def">(</span><span class="parameter">data</span><span class="def">)</span></code>
+        <p>As it turns out, the docstring is just Markdown! However, most docstring parsers in IDEs and text editors can pick out the important sections, if you name them correctly. There are three sections that we want to include. The convention is to use the dash-method of creating the header.</p>
+        <code><span class="def">def</span> <span class="function">blob_to_file</span><span class="def">(</span><span class="parameter">self</span>, <span class="parameter">blob</span>:<span class="class">oracledb</span>.DB_TYPE_BLOB, <span class="parameter">filename</span>: <span class="class">str</span><span class="def">)</span>:</code><br>
+        <code>&nbsp;&nbsp;<span class="string">"""</span></code><br>
+        <code>&nbsp;&nbsp;<span class="string">Copy the blob data returned by an Oracle database into a file.<br>&nbsp;&nbsp;When the data are returned by the cursor, it is in binary form in memory, and it needs to be written out byte-by-byte.<br>&nbsp;&nbsp;This method writes out a file to the disk, given that the blob data is given.</span></code><br>
+        <br>
+        <code>&nbsp;&nbsp;<span class="string">Parameters<br>&nbsp;&nbsp;----------</span></code><br>
+        <br>
+        <code>&nbsp;&nbsp;<span class="string">Returns<br>&nbsp;&nbsp;-------</span></code><br>
+        <br>
+        <code>&nbsp;&nbsp;<span class="string">Examples<br>&nbsp;&nbsp;--------</span></code><br>
+        <br>
+        <code>&nbsp;&nbsp;<span class="string">"""</span></code><br>
+        <code>&nbsp;&nbsp;<span class="parameter">offset</span> = <span class="number">1</span></code><br>
+        <code>&nbsp;&nbsp;<span class="parameter">num_bytes_in_chunk</span> = <span class="number">65536</span></code><br>
+        <code>&nbsp;&nbsp;<span class="keyword">with</span> <span class="function">open</span><span class="def">(</span><span class="parameter">filename</span>, <span class="string">'wb'</span><span class="def">)</span> <span class="keyword">as</span> <span class="parameter">f</span>:</code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span> <span class="def">True</span>:</code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Read the data from the blob object using the special oracledb.DB_TYPE_BLOB.read method</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">data</span> = <span class="parameter">blob</span>.read<span class="def">(</span><span class="parameter">offset</span>, <span class="parameter">num_bytes_in_chunk</span><span class="def">)</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="parameter">data</span>:</code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># If there's data still to write, write it to f</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">f</span>.<span class="function">write</span><span class="def">(</span><span class="parameter">data</span><span class="def">)</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="function">len</span><span class="def">(</span><span class="parameter">data</span><span class="def">) &lt; <span class="parameter">num_bytes_in_chunk</span>:</code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># If we reached the end of the file</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Keep increasing the offset from byte 1</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">offset</span> += <span class="function">len</span><span class="def">(</span><span class="parameter">data</span><span class="def">)</span></code>
+        <p>This formatting is useful because, in compatible docstring parsers, the IDE or text editor can actually pick out the individual parameter or variable and describe it as it is being filled out by the developer, such as the type and what its purpose is. Let's describe our code.</p>
+        <code><span class="def">def</span> <span class="function">blob_to_file</span><span class="def">(</span><span class="parameter">self</span>, <span class="parameter">blob</span>:<span class="class">oracledb</span>.DB_TYPE_BLOB, <span class="parameter">filename</span>: <span class="class">str</span><span class="def">)</span>:</code><br>
+        <code>&nbsp;&nbsp;<span class="string">"""</span></code><br>
+        <code>&nbsp;&nbsp;<span class="string">Copy the blob data returned by an Oracle database into a file.<br>&nbsp;&nbsp;When the data are returned by the cursor, it is in binary form in memory, and it needs to be written out byte-by-byte.<br>&nbsp;&nbsp;This method writes out a file to the disk, given that the blob data is given.</span></code><br>
+        <br>
+        <code>&nbsp;&nbsp;<span class="string">Parameters<br>&nbsp;&nbsp;----------</span></code><br>
+        <code>&nbsp;&nbsp;<span class="string">blob: oracledb.DB_TYPE_BLOB</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">The blob data as an oracledb.DB_TYPE_BLOB type</span></code><br>
+        <code>&nbsp;&nbsp;<span class="string">filename: str</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">The name of the file to write to</span></code><br>
+        <br>
+        <code>&nbsp;&nbsp;<span class="string">Returns<br>&nbsp;&nbsp;-------</span></code><br>
+        <code>&nbsp;&nbsp;<span class="string">None</span></code><br>
+        <br>
+        <code>&nbsp;&nbsp;<span class="string">Examples<br>&nbsp;&nbsp;--------</span></code><br>
+        <code>&nbsp;&nbsp;<span class="string">```python</span></code><br>
+        <code>&nbsp;&nbsp;<span class="string">from Database import Database</span></code><br>
+        <code>&nbsp;&nbsp;<span class="string">db = Database(...)</span></code><br>
+        <code>&nbsp;&nbsp;<span class="string">df = db.execute_select("SELECT ...")</span></code><br>
+        <code>&nbsp;&nbsp;<span class="string">for index, row in df.iterrows():</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">db.blob_to_file(row['blobdata'], row['filename'])</span></code><br>
+        <code>&nbsp;&nbsp;<span class="string">```</span></code><br>
+        <br>
+        <code>&nbsp;&nbsp;<span class="string">"""</span></code><br>
+        <code>&nbsp;&nbsp;<span class="parameter">offset</span> = <span class="number">1</span></code><br>
+        <code>&nbsp;&nbsp;<span class="parameter">num_bytes_in_chunk</span> = <span class="number">65536</span></code><br>
+        <code>&nbsp;&nbsp;<span class="keyword">with</span> <span class="function">open</span><span class="def">(</span><span class="parameter">filename</span>, <span class="string">'wb'</span><span class="def">)</span> <span class="keyword">as</span> <span class="parameter">f</span>:</code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span> <span class="def">True</span>:</code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Read the data from the blob object using the special oracledb.DB_TYPE_BLOB.read method</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">data</span> = <span class="parameter">blob</span>.read<span class="def">(</span><span class="parameter">offset</span>, <span class="parameter">num_bytes_in_chunk</span><span class="def">)</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="parameter">data</span>:</code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># If there's data still to write, write it to f</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">f</span>.<span class="function">write</span><span class="def">(</span><span class="parameter">data</span><span class="def">)</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="function">len</span><span class="def">(</span><span class="parameter">data</span><span class="def">) &lt; <span class="parameter">num_bytes_in_chunk</span>:</code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># If we reached the end of the file</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Keep increasing the offset from byte 1</span></code><br>
+        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">offset</span> += <span class="function">len</span><span class="def">(</span><span class="parameter">data</span><span class="def">)</span></code>
+        <p>Now, as the developer starts to type out <code><span class="function">blob_to_file</span><span class="def">(</span></code>, the IDE or text editor has the information to suggest the right parameters and their types to the developer.</p>
+        <p>This exercise is easy to try yourself. You can try it with this function, or you can write your own docstring for your own functions, methods, and classes.</p>
+        <p><a href="index.html">Back</a></p>
+    </body>
+</html>
