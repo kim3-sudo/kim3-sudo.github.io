@@ -43,6 +43,26 @@
         </p>
         <p>Much of the guidance provided here is <em>platform-agnostic</em>, meaning that it can generalize to all kinds of SQL databases. Specifically, they all comply with the SQL language definition.</p>
         <p>It is important to note that many SQL RDBMSes maintain additional functionality beyond what is specified in the SQL language construct. For example, Oracle SQL features a <code>REGEXP_REPLACE()</code> function that does not exist in other RDBMSes. Your specific flavor of SQL RDBMS may not support the exact functions you need. That means you'll have to achieve that same functionality either programatically in SQL or using an external processor.</p>
+        <p>
+            <b>Datatypes</b>
+        </p>
+        <p>Datatypes in SQL-type databases are not the same as datatypes in other languages! They may be similar, though!</p>
+        <ul>
+            <li><code>INT</code>: Integer; some dialects also specify a length for the integer, otherwise it is normally 4 bytes</li>
+            <li><code>TINYINT</code>: Tiny integer; also commonly used for boolean, as it is only 1 byte, where <code>0</code> is <code>FALSE</code> and <code>1</code> is <code>TRUE</code>. See below.</li>
+            <li><code>BIGINT</code>: Big integer; sometimes used in place of <code>REAL</code></li>
+            <li><code>DATE</code>: Date, without a time</li>
+            <li><code>TIME</code>: Time, without a date</li>
+            <li><code>DATETIME</code>: Date and time</li>
+            <li><code>TIMESTAMP</code>: A date in relationship to another point in time - avoid if possible</li>
+            <li><code>CHAR</code>: A single character, similar to C-type languages</li>
+            <li><code>VARCHAR()</code>: Variable-length character sets (like strings)</li>
+        </ul>
+        <p>
+            <b>Boolean values in SQL</b>
+        </p>
+        <p>You might notice a conspicuous absence of a boolean type in the SQL specification. In lieu of a proper boolean (true/false) type, most languages use the <code>TINYINT</code> type with two possible values: <code>0</code> and <code>1</code> (corresponding to <code>FALSE</code> and <code>TRUE</code>, respectively).</p>
+        <p>A value constraint may be set that allows only the values <code>0</code> and <code>1</code>. If a constraint is not set, then your software is responsible for ensuring that the data are correct.</p>
         <p><a href="index.html">Back</a></p>
     </body>
 </html>
